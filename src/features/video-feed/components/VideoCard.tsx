@@ -228,9 +228,9 @@ const VideoCard = forwardRef<HTMLVideoElement, VideoCardProps>(
                     }}
                   />
 
-                  <div className="flex absolute left-0 right-0 -bottom-1 h-full lg:[clip-path:inset(0px_round_0px_0px_16px_16px)]">
+                  <div className="flex absolute left-0 right-0 -bottom-1 lg:bottom-0 h-full lg:[clip-path:inset(0px_round_0px_0px_16px_16px)]">
                     <div
-                      className="w-full absolute bottom-0 translate-y-1/3 left-0 origin-left bg-primary z-10 transition-[height] duration-150 ease-in-out h-[4px] group-hover/progress:h-[6px]"
+                      className="w-full absolute bottom-0 translate-y-1/3 lg:translate-y-0 left-0 origin-left bg-primary z-10 transition-[height] duration-150 ease-in-out h-[4px] group-hover/progress:h-[6px]"
                       style={{
                         transform: `scaleX(${videoProgress / 100})`,
                       }}
