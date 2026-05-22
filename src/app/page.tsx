@@ -20,7 +20,7 @@ export default function HomePage() {
             authorAvatarUrl:
               "https://res.cloudinary.com/dezywk7nm/image/upload/v1732089659/pdbrffjlqjgln94dknoj.jpg",
             videoUrl:
-              "https://res.cloudinary.com/dezywk7nm/video/upload/v1732093413/khoa1_ujjx7g.mp4",
+              "https://videos.pexels.com/video-files/32330745/13791049_1440_2560_30fps.mp4",
             description: "Yo, I'm Khoa",
             likesCount: 0,
             shareCount: 0,
@@ -32,7 +32,7 @@ export default function HomePage() {
             authorAvatarUrl:
               "https://res.cloudinary.com/dezywk7nm/image/upload/v1732089659/pdbrffjlqjgln94dknoj.jpg",
             videoUrl:
-              "https://res.cloudinary.com/dezywk7nm/video/upload/v1732093414/khoa2_vddn1s.mp4",
+              "https://videos.pexels.com/video-files/32332929/13792523_1440_2560_30fps.mp4",
             description: "Yo, I'm Khoa",
             likesCount: 0,
             shareCount: 0,
@@ -44,7 +44,7 @@ export default function HomePage() {
             authorAvatarUrl:
               "https://res.cloudinary.com/dezywk7nm/image/upload/v1732089659/pdbrffjlqjgln94dknoj.jpg",
             videoUrl:
-              "https://res.cloudinary.com/dezywk7nm/video/upload/v1732093413/khoa3_cpsaxi.mp4",
+              "https://videos.pexels.com/video-files/34339103/14547652_1080_1920_30fps.mp4",
             description: "Yo, I'm Khoa",
             likesCount: 0,
             shareCount: 0,
