@@ -179,8 +179,8 @@ const VideoCard = forwardRef<HTMLVideoElement, VideoCardProps>(
               </div>
 
               {/* Top controls */}
-              <div className="absolute left-0 top-0 right-0 z-10 rounded-b-2xl hidden lg:block">
-                <div className="p-1 flex flex-row justify-between opacity-0 transition-opacity duration-300 rounded-t-2xl group-hover/video:opacity-100 group-hover/video:bg-[linear-gradient(0deg,rgba(18,18,18,0)_0%,rgba(12,12,12,0.2)_100%)]">
+              <div className="absolute left-0 top-0 right-0 z-10 rounded-b-2xl">
+                <div className="p-1 flex flex-row justify-between opacity-0 transition-opacity duration-300 rounded-t-2xl opacity-100 lg:opacity-0 lg:group-hover/video:opacity-100 lg:group-hover/video:bg-[linear-gradient(0deg,rgba(18,18,18,0)_0%,rgba(12,12,12,0.2)_100%)]">
                   <div className="flex h-10 justify-center items-center">
                     <button
                       onClick={() => {

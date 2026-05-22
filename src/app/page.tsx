@@ -6,7 +6,7 @@ import type { Video } from "~/features/video-feed/types/video.type";
 
 export default function HomePage() {
   const [videos, setVideos] = useState<Video[]>([]);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const vidRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
