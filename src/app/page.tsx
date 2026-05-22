@@ -1,65 +1,183 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useRef, useState } from "react";
+import VideoCard from "~/features/video-feed/components/VideoCard";
+import type { Video } from "~/features/video-feed/types/video.type";
+
+export default function HomePage() {
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [isMuted, setIsMuted] = useState(false);
+
+  const vidRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data: Video[] = [
+          {
+            id: "1",
+            authorName: "Nguyễn Khoa",
+            authorAvatarUrl:
+              "https://res.cloudinary.com/dezywk7nm/image/upload/v1732089659/pdbrffjlqjgln94dknoj.jpg",
+            videoUrl:
+              "https://res.cloudinary.com/dezywk7nm/video/upload/v1732093413/khoa1_ujjx7g.mp4",
+            description: "Yo, I'm Khoa",
+            likesCount: 0,
+            shareCount: 0,
+            commentsCount: 0,
+          },
+          {
+            id: "2",
+            authorName: "Nguyễn Khoa",
+            authorAvatarUrl:
+              "https://res.cloudinary.com/dezywk7nm/image/upload/v1732089659/pdbrffjlqjgln94dknoj.jpg",
+            videoUrl:
+              "https://res.cloudinary.com/dezywk7nm/video/upload/v1732093414/khoa2_vddn1s.mp4",
+            description: "Yo, I'm Khoa",
+            likesCount: 0,
+            shareCount: 0,
+            commentsCount: 0,
+          },
+          {
+            id: "3",
+            authorName: "Nguyễn Khoa",
+            authorAvatarUrl:
+              "https://res.cloudinary.com/dezywk7nm/image/upload/v1732089659/pdbrffjlqjgln94dknoj.jpg",
+            videoUrl:
+              "https://res.cloudinary.com/dezywk7nm/video/upload/v1732093413/khoa3_cpsaxi.mp4",
+            description: "Yo, I'm Khoa",
+            likesCount: 0,
+            shareCount: 0,
+            commentsCount: 0,
+          },
+        ];
+
+        const shuffled = [...data];
+
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        setVideos(shuffled);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("isMuted", JSON.stringify(isMuted));
+
+    vidRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = isMuted;
+      }
+    });
+  }, [isMuted]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+
+          if (entry.isIntersecting) {
+            video.currentTime = 0;
+
+            setTimeout(() => {
+              video.play();
+            }, 100);
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.8,
+      },
+    );
+
+    vidRefs.current.forEach((video) => {
+      if (video) {
+        observer.observe(video);
+      }
+    });
+
+    return () => {
+      vidRefs.current.forEach((video) => {
+        if (video) {
+          observer.unobserve(video);
+        }
+      });
+    };
+  }, [videos]);
+
+  useEffect(() => {
+    localStorage.setItem("isMuted", JSON.stringify(isMuted));
+
+    vidRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = isMuted;
+      }
+    });
+  }, [isMuted]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+
+          if (entry.isIntersecting) {
+            video.currentTime = 0;
+
+            setTimeout(() => {
+              video.play();
+            }, 100);
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.8,
+      },
+    );
+
+    vidRefs.current.forEach((video) => {
+      if (video) {
+        observer.observe(video);
+      }
+    });
+
+    return () => {
+      vidRefs.current.forEach((video) => {
+        if (video) {
+          observer.unobserve(video);
+        }
+      });
+    };
+  }, [videos]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="flex w-full overflow-x-hidden transition-all duration-300 linear scroll-smooth h-screen items-center justify-center">
+      <div className="w-full bg-white h-screen lg:max-h-[calc(100vh-60px)] overflow-y-scroll [scrollbar-width:none] snap-y snap-mandatory pb-[70px] lg:mb-0">
+        {videos.map((item, index) => (
+          <VideoCard
+            key={item.id}
+            data={item}
+            isMuted={isMuted}
+            setIsMuted={setIsMuted}
+            ref={(el) => {
+              vidRefs.current[index] = el;
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
